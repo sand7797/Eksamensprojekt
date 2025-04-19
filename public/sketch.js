@@ -105,13 +105,6 @@ function draw() {
 
     if (mouseX >= x && mouseX < x+pixelsize && mouseY >= y && mouseY < y+pixelsize) {
       currentObj = obj;
-
-      if (mouseIsPressed === true) {
-	currentObj.c = chosenColour;
-	let token = msalInstance.getAccount()?.idToken
-	  sendPixel({currentObj,token:token})
-	  console.log(loggedIn)
-      }
     }
   });
 
@@ -141,6 +134,15 @@ function draw() {
 	login();
       }
     }
+  }
+}
+
+function mouseClicked() {
+  //0,0,pixelsize*125,pixelsize*75
+  if (mouseX < pixelsize*125 && mouseY < pixelsize*75) {
+    currentObj.c = chosenColour;
+    let token = msalInstance.getAccount()?.idToken
+    sendPixel(currentObj,token)
   }
 }
 
@@ -178,7 +180,8 @@ function fetchCanvas() {
 }
 setInterval(fetchCanvas, 2000);
 
-function sendPixel(message) {
+function sendPixel(pixel,token) {
+  let message = {currentObj,token:token}
   fetch("http://localhost:3000/pixel", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
