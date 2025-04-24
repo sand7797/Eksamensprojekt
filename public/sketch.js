@@ -7,6 +7,7 @@ let loggedIn = false
 let textString = ""
 let lastPlaceTime;
 let endTime;
+let mousePressed = false;
 
 function preload() {
   loginImg = loadImage('/assets/mslogin.png')
@@ -14,8 +15,6 @@ function preload() {
 }
 
 function setup() {
-  //Checktime
-
   checkKonto()
   fetchCanvas()
 
@@ -56,17 +55,17 @@ function draw() {
       let y = 200+60*j;
       fill(colours[c])
       
-      if (chosenColour === c) {
-	square(x-5, y-5, 60)
-      } else {
-	square(x, y, 50)
-      }
-
       if (mouseX >= x && mouseX < x+50 && mouseY >= y && mouseY < y+50) {
 	cursor(HAND);
 	if (mouseIsPressed === true) {
 	  chosenColour = c;
 	}
+      }
+
+      if (chosenColour === c) {
+	square(x-5, y-5, 60)
+      } else {
+	square(x, y, 50)
       }
       c++;
     }
