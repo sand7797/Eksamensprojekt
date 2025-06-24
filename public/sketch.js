@@ -84,6 +84,7 @@ function draw() {
     } else {
       textString = "Log ind først"
     }
+
     push()
     textAlign(CENTER, CENTER);  
     textSize(16);
