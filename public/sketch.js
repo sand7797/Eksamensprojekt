@@ -181,7 +181,7 @@ function fetchCanvas() {
 setInterval(fetchCanvas, 2000);
 
 function sendPixel(pixel,token) {
-  let message = {currentObj,token:token}
+  let message = {currentObj:pixel,token:token}
   fetch("http://localhost:3000/pixel", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
